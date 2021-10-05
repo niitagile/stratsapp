@@ -1,0 +1,286 @@
+CREATE A PROGRAM TO TAKE 5 VALUES IN ARRAY AND DO TOTAL
+var arr = [12, 13,14,15,16];
+let result=0;
+for(var i = 0;i<arr.length;i++){
+ console.log(arr[i]) ;
+ result=result+arr[i];
+ console.log(result);
+}
+
+============================================
+CONVERTING ARRAY OF STRINGS INTO UPPERCASE
+
+const names = ['Ali', 'Atta', 'Alex', 'John'];
+
+const uppercased = names.map(name => name.toUpperCase());
+
+console.log(uppercased);
+=====================================================
+
+var employee: [number, string] = [1, "Steve"];
+var person: [number, string, boolean] = [1, "Steve", true];
+
+var user: [number, string, boolean, number, string];// declare tuple variable
+user = [1, "Steve", true, 20, "Admin"];// initialize tuple variable
+console.log(user[0])
+user[1]="Mike"
+console.log(user);
+=========================================================
+
+//enum example
+enum PrintMedia {
+    Newspaper = 1,
+    Newsletter,
+    Magazine,
+    Book
+}
+
+console.log(PrintMedia[1])
+
+
+enum AppStatus {  
+    ACTIVE = 'Yes',  
+    INACTIVE = 1,  
+    ONHOLD = 2,  
+    ONSTOP = 'STOP'  
+}  
+console.log(AppStatus.ACTIVE);  
+console.log(AppStatus.ONHOLD);  
+
+
+
+
+let value: number|string;  
+value = 120;  
+console.log("The Numeric value of a value is: "+value);  
+value = "Welcome to Java";  
+console.log("The String value of a value is: "+value);  
+
+console.log(typeof(value) === "string")
+==============================================================
+let arr: any[] = ["John", 212, true]; 
+arr.push("Smith"); 
+console.log(arr); //Output: [ 'John', 212, true, 'Smith' ] 
+
+
+/*function sayHi(): void { 
+    console.log('Hi!')
+} 
+
+let speech: void = sayHi(); 
+console.log(speech); //Output: undefined*/
+
+
+function sayHi(): string { 
+    //console.log('Hi!')
+    return "Hello!";
+} 
+
+let speech: string = sayHi(); 
+console.log(speech); //Output: undefined
+=============================================================
+/*let nothing: void = undefined;
+let num: void = 1; // Error*/
+
+function throwError(errorMsg: string): never { 
+            throw new Error(errorMsg); 
+} 
+
+function keepProcessing(): never { 
+            while (true) { 
+         console.log('I always does something and never ends.')
+     }
+}
+
+
+var a=34;
+{
+    let num=23;
+    console.log(a);
+}
+//console.log(num);
+============================================================
+//Lambda expression
+//function overloading
+/*TypeScript provides the concept of function overloading. 
+You can have multiple functions with the same name but different parameter types 
+and return type. 
+However, the number of parameters should be the same.*/
+
+function add(a:string, b:string):string;
+
+function add(a:number, b:number): number;
+
+function add(a: any, b:any): any {
+    return a + b;
+}
+
+add("Hello ", "Steve"); // returns "Hello Steve" 
+add(10, 20); // returns 30
+/*When the number of parameters that a function will receive
+ is not known or can vary, we can use rest parameters.
+ rest parameters must come last in the function definition*/
+ function Greet(greeting: string, ...names: string[]) {
+    return greeting + " " + names.join(", ") + "!";
+}
+
+Greet("Hello", "Steve", "Bill"); // returns "Hello Steve, Bill!"
+
+Greet("Hello");// returns "Hello !"
+==============================================
+/*class Employee {
+    empCode: number;
+    empName: string;
+
+    constructor(code: number, name: string) {
+            this.empName = name;
+            this.empCode = code;
+    }
+
+    getSalary() : number {
+        return 10000;
+    }
+}
+let emp = new Employee(100,"Steve");
+
+*/
+
+class Employee {
+    empCode: number;
+    empName: string;
+}
+
+let emp = new Employee();
+=================================================
+class Person {
+    name: string;
+    
+    constructor(name: string) {
+        this.name = name;
+    }
+}
+
+class Employee extends Person {
+    empCode: number;
+    
+    constructor(empcode: number, name:string) {
+        super(name);
+        this.empCode = empcode;
+    }
+    
+    displayName():void {
+        console.log("Name = " + this.name +  ", Employee Code = " + this.empCode);
+    }
+}
+
+let emp = new Employee(100, "Bill");
+emp.displayName(); // Name = Bill, Employee Code = 100
+======================================================================
+interface IPerson {
+    name: string;
+    display():void;
+}
+
+interface IEmployee {
+    empCode: number;
+}
+
+class Employee implements IPerson, IEmployee {
+    empCode: number;
+    name: string;
+    
+    constructor(empcode: number, name:string) {
+        this.empCode = empcode;
+        this.name = name;
+    }
+    
+    display(): void {
+        console.log("Name = " + this.name +  ", Employee Code = " + this.empCode);
+    }
+}
+
+let per:IPerson = new Employee(100, "Bill");
+per.display(); // Name = Bill, Employee Code = 100
+
+let emp:IEmployee = new Employee(100, "Bill");
+emp.display(); //Compiler Error: Property 'display' does not exist on type 'IEmployee
+============================================================================
+interface KeyPair {
+    key: number;
+    value: string;
+}
+
+let kv1: KeyPair = { key:1, value:"Steve" }; // OK
+
+let kv2: KeyPair = { key:1, val:"Steve" }; // Compiler Error: 'val' doesn't exist in type 'KeyPair'
+
+let kv3: KeyPair = { key:1, value:100 }; // Compiler Error:
+===========================================================================
+interface KeyValueProcessor
+{
+    (key: number, value: string): void;
+};
+
+function addKeyValue(key:number, value:string):void { 
+    console.log('addKeyValue: key = ' + key + ', value = ' + value)
+}
+
+function updateKeyValue(key: number, value:string):void { 
+    console.log('updateKeyValue: key = '+ key + ', value = ' + value)
+}
+    
+let kvp: KeyValueProcessor = addKeyValue;
+kvp(1, 'Bill'); //Output: addKeyValue: key = 1, value = Bill 
+
+kvp = updateKeyValue;
+kvp(2, 'Steve'); //Output: updateKeyValue: key = 2, value = Steve
+================================================================================
+nterface NumList {
+    [index:number]:number
+}
+
+let numArr: NumList = [1, 2, 3];
+numArr[0];
+numArr[1];
+
+interface IStringList {
+    [index:string]:string
+}
+
+let strArr : IStringList = {};
+strArr["TS"] = "TypeScript";
+strArr["JS"] = "JavaScript";
+console.log(strArr["TS"])
+================================================================================
+/optional properties
+interface IEmployee {
+    empCode: number;
+    empName: string;
+    empDept?:string;
+}
+
+let empObj1:IEmployee = {   // OK
+    empCode:1,
+    empName:"Steve"
+}
+
+let empObj2:IEmployee = {    // OK
+    empCode:1,
+    empName:"Bill",
+    empDept:"IT"
+}
+=============================================================================
+/Read only property
+interface Citizen {
+    name: string;
+    readonly SSN: number;
+}
+
+let personObj: Citizen  = { SSN: 110555444, name: 'James Bond' }
+
+personObj.name = 'Steve Smith'; // OK
+personObj.SSN = '333666888'; // Compiler Error
+=============================================================================
+
+
+
