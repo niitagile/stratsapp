@@ -160,3 +160,151 @@ Html file
 </div>
 
 <script src="RegController.js"></script>
+
+*****************************************************************
+
+$rootScope  -- there are some properties which are common for all controllers that you can access through rootscope. 
+
+<body ng-app="myApp">
+
+<h1>{{name}}</h1>-- Stratsapp
+
+<div ng-controller="ctrl1">
+	<h1>{{name}}</h1>
+</div>
+
+
+<script>
+var app=angular.module('myApp',[]);-- []-- always write down only dependent modules
+app.run(function($rootScope){
+	$rootScope.name='Stratsapp';
+});
+
+app.controller('ctrl1' fuction($scope){
+
+	$scope.name="Geetha";
+	});
+}
+
+
+
+
+</script>
+
+*********************************************************
+how to create own directives
+
+name must be in camel case -- displayInfo
+
+we can use adirective by using: element name, attribute class, comment
+
+<body ng-app="myapp">
+
+<displayInfo></displayInfo>
+
+<script>
+var app=angular.module("myApp",[]);
+app.directive("displayInfo", function(){
+
+	return{
+		restrict : 'E',
+		template : "<h2> I am creating my directive</h1>"
+	};
+});
+</script>
+
+**********************************************************
+directive as class
+<body ng-app="myapp">
+
+
+<div class="displayInfo">
+
+<script>
+var app=angular.module("myApp",[]);
+app.directive("displayInfo", function(){
+
+	return{
+		restrict : "C",
+		template : "<h2> I am creating my directive</h1>"
+	};
+});
+</script>
+********************************************************
+
+directive as comment
+
+<body ng-app="myapp">
+
+
+<!--directive: displayInfo -->
+
+<script>
+var app=angular.module("myApp",[]);
+app.directive("displayInfo", function(){
+
+	return{
+		restrict : "M",
+		replace= true,
+		template : "<h2> I am creating my directive</h1>"
+	};
+});
+</script>
+*************************************************************
+	directive as attribute
+<body ng-app="myapp">
+
+
+<div displayInfo>
+
+<script>
+var app=angular.module("myApp",[]);
+app.directive("displayInfo", function(){
+
+	return{
+		restrict : "A",
+		template : "<h2> I am creating my directive</h1>"
+	};
+});
+</script>
+******************************************
+E- Element
+A- attribute
+C- class
+M - comment
+
+
+
+
+****************************************************************
+			ng -model  -- binding -- two way binding
+<body>
+<form ng-app="" name="regForm">
+	<input type="email" name="mymail" ng-model="text">
+	<span ng-show="regForm.mymail.$error.email">Not a valid e-mail address</span>
+
+****************
+
+ng-model - if any property is not available then angular creates it
+it provides status for application data
+
+valid  -- meets all criteria
+dirty -- value has been changed
+touched - the field has been in focus
+error
+
+<body>
+<form ng-app="" name="regForm" ng-init="text='nidhi@abc.com'">
+	<input type="email" name="mymail" ng-model="text" required>
+	<span ng-show="regForm.mymail.$error.email">Not a valid e-mail address</span>
+
+<p>
+{{regForm.mymail.$valid}}
+{{regForm.mymail.$dirty}}
+{{regForm.mymail.$touched}}
+
+</p>
+
+
+
+
