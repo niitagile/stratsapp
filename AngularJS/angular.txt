@@ -1,0 +1,162 @@
+angular with html --- ng-directives
+
+
+ng-app-- angularjs application
+
+ng-model-- binds html control values with application data
+
+ng-bind -- binds application data to html view
+
+
+<html>
+<body>
+<div ng-app="">
+<input type="text" ng-model="username">
+<p ng-bind="username"></p>
+
+
+</div>
+</body>
+</html>
+
+
+Example2
+
+<div ng-app="" ng-init="username='Kavish'">
+<p ng-bind="username"></p>
+</div>
+
+want to implements data validation
+
+<div ng-app="" data-ng-init="username='Kavish'">
+<p data-ng-bind="username"></p>
+</div>
+
+
+Expression
+
+
+<p>{{5+5}}}</p>
+
+
+<html>
+<body>
+<div ng-app="">
+<input type="text" ng-model="username">
+<p>{{username}}</p>
+
+
+</div>
+</body>
+</html>
+
+**********************************************************
+Controller-- control the data
+It is just like javascript object
+
+ng-controller-- to define application controller
+
+<div ng-app="Reg" ng-controller="RegCtrl">
+<input type="text" ng-model="name">
+<input type="number" ng-model="age">
+
+Display information {{name+" "+age}}
+</div>
+
+<script>
+var app=angular.module('Reg', []);
+app.controller('RegCtrl', function($scope){
+	$scope.name="Anisha";
+	$scope.age=23;
+
+}
+);
+
+</script>
+
+
+how to add functions in controller
+
+<div ng-app="Reg" ng-controller="RegCtrl">
+<input type="text" ng-model="name">
+<input type="number" ng-model="age">
+
+Display information {{display()}}
+</div>
+
+<script>
+var app=angular.module('Reg', []);
+app.controller('RegCtrl', function($scope){
+	$scope.name="Anisha";
+	$scope.age=23;
+
+	$scope.display=function(){
+		return $scope.name+" "+$scope.age;
+	} 
+
+}
+);
+
+</script>
+
+*********************************************************************   
+
+How to add External Controller file
+
+<div ng-app="Reg" ng-controller="RegCtrl">
+<input type="text" ng-model="name">
+<input type="number" ng-model="age">
+
+Display information {{display()}}
+</div>
+<script src="RegController.js"></script>
+
+
+
+
+
+
+RegController.js
+
+var app=angular.module('Reg', []);
+app.controller('RegCtrl', function($scope){
+	$scope.name="Anisha";
+	$scope.age=23;
+
+	$scope.display=function(){
+		return $scope.name+" "+$scope.age;
+	} 
+
+}
+);
+
+*************************************************************
+How to create objects in controller
+RegController.js 
+
+
+var app=angular.module('Reg', []);
+app.controller('RegCtrl', function($scope){
+	$scope.info= [
+
+		{name: 'Jyoti', age: 34},
+		{name: 'Moni', age: 24}
+
+		];		
+
+);
+
+
+
+Html file
+<div ng-app="Reg" ng-controller="RegCtrl">
+<table>
+<tr ng-repeat="row in info">
+	<td>{{row.name}}</td>
+	<td>{{row.age}}</td>
+	</tr>
+</table>
+
+</div>
+
+<script src="RegController.js"></script>
