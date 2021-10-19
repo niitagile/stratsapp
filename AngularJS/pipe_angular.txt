@@ -1,0 +1,59 @@
+
+1) create 1 file temp-converter.pipe.ts
+import {Pipe, PipeTransform} from '@angular/core';
+ //give name to pipe
+@Pipe({
+    name: 'tempConverter'
+})
+//create class and implements interface PipeTransform 
+//and overide trasform method which always takes 2 arguments
+export class TempConverterPipe implements PipeTransform {
+    transform(value: number, unit: string) {
+        if(value && !isNaN(value)) {
+            if (unit === 'C') {
+                var temperature = (value - 32) /1.8 ;
+                return temperature.toFixed(2);
+            } else if (unit === 'F'){
+                var temperature = (value * 1.8 ) + 32
+                return temperature.toFixed(2);
+            }
+        }
+        return;
+    }
+}
+ 
+
+2)app.module.ts
+import {TempConverterPipe} from './temp-convertor.pipe';
+@NgModule({
+  declarations: [
+    AppComponent,
+    GreetComponent,
+    TempConverterPipe
+  ],
+
+
+
+3) app.componnet.ts
+celcius: number=0;
+    Fahrenheit: number=0;  
+
+4) app.component.html
+
+      <div >
+        <h3>Fahrenheit to Celsius </h3>
+      </div>
+      <div >
+        <p> Fahrenheit : <input type="text" [(ngModel)]="Fahrenheit" /> 
+        Celsius : {{Fahrenheit | tempConverter:'C'}} </p>
+      </div>
+   
+      <div >
+        <h3>Celsius to Fahrenheit </h3>
+      </div>
+      <div >
+        <p> celsius : <input type="text" [(ngModel)]="celcius" /> 
+         Fahrenheit : {{celcius | tempConverter:'F'}} </p>
+      </div>
+   
+ 
